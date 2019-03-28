@@ -6,6 +6,7 @@
     "jsRules": {},
     "rulesDirectory": [],
     "rules" :{
-        "quotemark": [true, "single"]
+        "quotemark": [true, "single"],
+        "indent": [true, "spaces", 2]
     }
 }

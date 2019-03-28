@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import {Express} from 'express';
-import routerBind from './router';
+import routerBind from '../src/router';
 
 const app: Express = express();
 routerBind(app);

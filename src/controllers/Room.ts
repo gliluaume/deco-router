@@ -1,8 +1,9 @@
-import { Get } from '../router';
+import { Get, parsereq, query } from '../router';
 
 export default class Room {
     @Get('/Room')
-    public get() {
-        return { name: 'Single', id: 1 };
+    @parsereq
+    public get(@query param: any, name: string) {
+        return { name: 'Single', id: 1, param  };
     }
 }
