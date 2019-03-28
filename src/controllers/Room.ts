@@ -1,8 +1,8 @@
-import { Get } from '../router'
+import { Get } from '../router';
 
 export default class Room {
     @Get('/Room')
     public get() {
-        return { name: 'Single', id: 1 }
+        return { name: 'Single', id: 1 };
     }
 }

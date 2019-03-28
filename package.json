@@ -8,6 +8,7 @@
     "serve": "nodemon dist/server.js",
     "test": "jest",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "tslint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
     "watch-ts": "tsc -w"
   },
   "author": "",
