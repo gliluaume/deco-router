@@ -8,6 +8,7 @@
     "serve": "nodemon dist/server.js",
     "nopretest": "npm run build-ts",
     "test": "jest --detectOpenHandles --forceExit",
+    "test:w": "jest --watch --detectOpenHandles --forceExit",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "tslint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
     "watch-ts": "tsc -w"

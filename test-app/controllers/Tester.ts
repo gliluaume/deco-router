@@ -1,4 +1,6 @@
+import { parseQueryType, parsereq, query } from '../../src/parser';
 import { Get } from '../../src/router';
+import { Toto } from '../model/Toto';
 
 export default class Tester {
     @Get('/test/stat')
@@ -8,5 +10,15 @@ export default class Tester {
     @Get('/test')
     public get() {
         return { nom: 'Roger' };
+    }
+    @Get('/param')
+    @parsereq
+    public getQ(@query params: any) {
+        return params;
+    }
+    @Get('/type-parse')
+    @parseQueryType(Toto)
+    public getTypeParse(@query params: Toto) {
+        return params;
     }
 }

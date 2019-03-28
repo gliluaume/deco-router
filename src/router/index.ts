@@ -17,34 +17,6 @@ export function Get(path: string) {
     };
 }
 
-const queryMetadataKey = Symbol('query');
-export function query(target: object, propertyKey: string | symbol, parameterIndex: number) {
-    debug('query');
-    debug('query', target);
-    debug('query', propertyKey);
-    debug('query', parameterIndex);
-
-    const existingQueryParams: any[] = Reflect.getOwnMetadata(queryMetadataKey, target, propertyKey) || [];
-    existingQueryParams.push(parameterIndex);
-    Reflect.defineMetadata(queryMetadataKey, existingQueryParams, target, propertyKey);
-    debug('query', existingQueryParams);
-}
-
-export function parsereq(target: any, propertyName: string, descriptor: TypedPropertyDescriptor<Function>) {
-    debug('parsereq');
-    debug('parsereq', target);
-    debug('parsereq', propertyName);
-    debug('parsereq', descriptor);
-    const method = descriptor.value;
-    descriptor.value = function() {
-        const queryParameterIndexes: number[] = Reflect.getOwnMetadata(queryMetadataKey, target, propertyName);
-        const queryParameters = queryParameterIndexes.map((index) => arguments[index]);
-        debug(method, queryParameters);
-
-        return method.apply(this, arguments);
-    };
-}
-
 export default function bind(expApp: Express) {
     app = expApp;
 }
