@@ -1,4 +1,6 @@
-import { Get, parsereq, query } from '../router';
+import { parsereq, query } from '../parser';
+import { Get } from '../router';
+
 
 export default class Room {
     @Get('/Room')
