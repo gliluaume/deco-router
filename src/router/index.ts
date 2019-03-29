@@ -21,7 +21,6 @@ export function Get(path: string) {
     debug('call Get factory');
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
         debug('Get: called', target);
-        // app.get(path, wrapGet(target, descriptor.value));
         routesToBind.push({
             descriptor,
             method: 'get',
@@ -30,7 +29,6 @@ export function Get(path: string) {
         });
     };
 }
-
 
 export default function bind(expApp: Express) {
     app = expApp;

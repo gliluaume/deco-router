@@ -16,7 +16,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "reflect-metadata": "^0.1.13",
     "typescript": "^3.3.4000"
