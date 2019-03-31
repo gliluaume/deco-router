@@ -6,10 +6,20 @@ function debug(...params: any[]) {
     // tslint:disable-next-line
     DEBUG && console.log.apply(null, params);
 }
+type httpMethod =
+      'get'
+    | 'post'
+    | 'put'
+    | 'patch'
+    | 'head'
+    | 'options'
+    | 'connect'
+    | 'trace'
+    | 'delete';
 
 interface IMethodDesc {
     descriptor: PropertyDescriptor;
-    method: 'get' | 'post' | 'head' | 'options';
+    method: httpMethod;
     path: string;
     target: any;
 }
@@ -17,21 +27,33 @@ interface IMethodDesc {
 let app: Express;
 const routesToBind: IMethodDesc[] = [];
 
-export function Get(path: string) {
-    debug('call Get factory');
-    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-        debug('Get: called', target, path);
-        if (routesToBind.some((routeDesc) => routeDesc.path === path)) {
-            throw Error(`Route ${path} has already been registred`);
-        }
-        routesToBind.push({
-            descriptor,
-            method: 'get',
-            path,
-            target,
-        });
-    };
+export function decoratorFactory(method: httpMethod) {
+    return (path: string) => {
+        debug('call Get factory');
+        return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+            debug('Get: called', target, path);
+            if (routesToBind.some((routeDesc) => routeDesc.path === path)) {
+                throw Error(`Route ${path} has already been registred`);
+            }
+            routesToBind.push({
+                descriptor,
+                method,
+                path,
+                target,
+            });
+        };
+    }
 }
+
+export const Get = decoratorFactory('get');
+export const Post = decoratorFactory('post');
+export const Put = decoratorFactory('put');
+export const Patch = decoratorFactory('patch');
+export const Head = decoratorFactory('head');
+export const Options = decoratorFactory('options');
+export const Connect = decoratorFactory('connect');
+export const Trace = decoratorFactory('trace');
+export const Delete = decoratorFactory('delete');
 
 export function bindApp(expApp: Express) {
     app = expApp;
