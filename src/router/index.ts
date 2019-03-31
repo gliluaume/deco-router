@@ -20,7 +20,10 @@ const routesToBind: IMethodDesc[] = [];
 export function Get(path: string) {
     debug('call Get factory');
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-        debug('Get: called', target);
+        debug('Get: called', target, path);
+        if (routesToBind.some((routeDesc) => routeDesc.path === path)) {
+            throw Error(`Route ${path} has already been registred`);
+        }
         routesToBind.push({
             descriptor,
             method: 'get',
@@ -32,12 +35,13 @@ export function Get(path: string) {
 
 export function bindApp(expApp: Express) {
     app = expApp;
-    routesToBind.forEach((desc: IMethodDesc) => {
+    while (routesToBind.length > 0) {
+        const desc = routesToBind.pop();
         app[desc.method](
             desc.path,
             wrapGet(desc.target, desc.descriptor.value));
-        debug(`Registered: ${desc.method.toUpperCase()} ${desc.path}`);
-    });
+        debug(`Registered: ${desc.method.toUpperCase()} ${desc.path} for: ${desc.target.constructor.name}`);
+    }
 }
 
 function wrapGet(target: any, fn: any) {
