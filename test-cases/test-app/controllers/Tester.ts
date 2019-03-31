@@ -1,5 +1,5 @@
-import { parseQueryType, parsereq, query } from '../../src/parser';
-import { Get } from '../../src/router';
+import { parseQueryType, parsereq, query } from '../../../src/parser';
+import { Get } from '../../../src/router';
 import { Toto } from '../model/Toto';
 
 export default class Tester {

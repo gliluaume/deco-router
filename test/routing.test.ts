@@ -1,5 +1,5 @@
-import appFactory from '../app-builder';
-import testApp from '../test-app/app';
+import appFactory from '../test-cases/app-builder';
+import testApp from '../test-cases/test-app/app';
 // tslint:disable-next-line no-var-requires
 const request = require('supertest');
 
