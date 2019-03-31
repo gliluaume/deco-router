@@ -1,4 +1,4 @@
-import testApp from '../../test-app/app';
+import testApp from '../test-app/app';
 const request = require('supertest');
 
 describe('Decorators - Routing', () => {

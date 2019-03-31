@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-ts": "tsc",
-    "serve": "nodemon dist/src/server.js",
+    "serve": "nodemon dist/test-app/server.js",
     "nopretest": "npm run build-ts",
     "test": "jest --detectOpenHandles --forceExit",
     "test:w": "jest --watch --detectOpenHandles --forceExit",

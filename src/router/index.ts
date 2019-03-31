@@ -30,7 +30,7 @@ export function Get(path: string) {
     };
 }
 
-export default function bind(expApp: Express) {
+export function bindApp(expApp: Express) {
     app = expApp;
     routesToBind.forEach((desc: IMethodDesc) => {
         app[desc.method](
