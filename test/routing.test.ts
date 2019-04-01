@@ -48,24 +48,3 @@ describe('Decorators - Routing', () => {
                 }));
     });
 });
-
-describe('Decorators - Parameters', () => {
-    it('get one param value from query parameters', async () =>
-        await request(testApp)
-            .get('/param?id=F4K3')
-            .expect(200)
-            .then((res: any) => {
-                expect(res.body).toBeInstanceOf(Object);
-                expect(res.body).toEqual({ id: 'F4K3' });
-            }));
-
-    it('type query param', async () => {
-        await request(testApp)
-            .get('/type-parse?id=42&name=roger')
-            .expect(200)
-            .then((res: any) => {
-                expect(res.body).toBeInstanceOf(Object);
-                expect(res.body).toEqual({ id: 42, name: 'roger' });
-            });
-    });
-});

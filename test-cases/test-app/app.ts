@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import {Express} from 'express';
-import {bindApp} from '../../src/router';
+import {bindApp} from '../..';
 
 // tslint:disable-next-line no-var-requires
 require('./controllers');

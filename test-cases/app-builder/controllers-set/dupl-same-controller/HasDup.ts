@@ -1,4 +1,4 @@
-import { Get } from '../../../../src/router';
+import { Get } from '../../../..';
 
 export default class HasDup {
     @Get('/test/stat')

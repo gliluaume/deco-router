@@ -16,11 +16,11 @@
     "url": "https://github.com/gliluaume/deco-router"
   },
   "files": [
-    "src/**/*"
+    "index.ts"
   ],
   "scripts": {
     "build-ts": "tsc",
-    "serve": "nodemon dist/test-app/server.js",
+    "serve": "nodemon dist/test-cases/test-app/server.js",
     "nopretest": "npm run build-ts",
     "test": "jest --detectOpenHandles --forceExit",
     "test:w": "jest --watch --detectOpenHandles --forceExit",

@@ -20,6 +20,6 @@
         "src/**/*",
         "test-app/**/*",
         "test-cases/**/*",
-        "app-builder/**/*"
+        "app-builder/**/*", "index.ts"
     ]
 }
