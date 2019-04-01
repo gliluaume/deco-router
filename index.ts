@@ -1,4 +1,4 @@
-import { Express } from 'express';
+import { Express, NextFunction, Request, Response } from 'express';
 import 'reflect-metadata';
 
 const DEBUG = false;
@@ -61,18 +61,7 @@ export function bindApp(expApp: Express) {
         const desc = routesToBind.pop();
         app[desc.method](
             desc.path,
-            wrapGet(desc.target, desc.descriptor.value));
+            desc.descriptor.value);
         debug(`Registered: ${desc.method.toUpperCase()} ${desc.path} for: ${desc.target.constructor.name}`);
     }
-}
-
-function wrapGet(target: any, fn: any) {
-    return (req: any, res: any, next: any) => {
-        const computed = fn(req.query);
-        debug(`${target.constructor.name}.${fn.name}`,
-            'called with',
-            req.query);
-        res.json(computed);
-        next();
-    };
 }
