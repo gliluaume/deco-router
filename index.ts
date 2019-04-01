@@ -1,13 +1,17 @@
 import { Express, NextFunction, Request, Response } from 'express';
 import 'reflect-metadata';
 
-const DEBUG = false;
-function debug(...params: any[]) {
+let debug = (...params: any[]) => {
     // tslint:disable-next-line
-    DEBUG && console.log.apply(null, params);
+    console.log.apply(null, params);
+};
+
+export function setLogger(logger: (...params: any[]) => void) {
+    debug = logger;
 }
+
 type httpMethod =
-      'get'
+    'get'
     | 'post'
     | 'put'
     | 'patch'
@@ -29,9 +33,7 @@ const routesToBind: IMethodDesc[] = [];
 
 export function decoratorFactory(method: httpMethod) {
     return (path: string) => {
-        debug('call Get factory');
         return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
-            debug('Get: called', target, path);
             if (routesToBind.some((routeDesc) => routeDesc.path === path)) {
                 throw Error(`Route ${path} has already been registred`);
             }
@@ -62,6 +64,6 @@ export function bindApp(expApp: Express) {
         app[desc.method](
             desc.path,
             desc.descriptor.value);
-        debug(`Registered: ${desc.method.toUpperCase()} ${desc.path} for: ${desc.target.constructor.name}`);
+        debug(`Registered: ${desc.method.toUpperCase()} ${desc.path}`);
     }
 }
