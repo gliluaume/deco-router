@@ -1,5 +1,5 @@
 {
-  "name": "deco-router",
+  "name": "@gliluaume/deco-router",
   "version": "1.0.0",
   "description": "decorator for routing in an express context",
   "main": "index.js",
