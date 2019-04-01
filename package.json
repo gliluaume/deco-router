@@ -1,8 +1,23 @@
 {
-  "name": "decorouter",
+  "name": "deco-router",
   "version": "1.0.0",
-  "description": "",
+  "description": "decorator for routing in an express context",
   "main": "index.js",
+  "keywords": [
+    "node",
+    "typescript",
+    "decorator",
+    "express",
+    "route",
+    "routing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gliluaume/deco-router"
+  },
+  "files": [
+    "src/**/*"
+  ],
   "scripts": {
     "build-ts": "tsc",
     "serve": "nodemon dist/test-app/server.js",
@@ -13,7 +28,7 @@
     "tslint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
     "watch-ts": "tsc -w"
   },
-  "author": "",
+  "author": "gliluaume",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
