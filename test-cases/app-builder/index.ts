@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import {Express} from 'express';
-import {bindApp} from '../..';
+import { Express } from 'express';
+import { bindApp } from '../..';
 
 export default function appFactory(controllerPath: string) {
     // tslint:disable-next-line no-var-requires

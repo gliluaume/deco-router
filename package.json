@@ -24,8 +24,8 @@
     "nopretest": "npm run build-ts",
     "test": "jest --detectOpenHandles --forceExit",
     "test:w": "jest --watch --detectOpenHandles --forceExit",
-    "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "tslint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "lint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
     "watch-ts": "tsc -w"
   },
   "author": "gliluaume",

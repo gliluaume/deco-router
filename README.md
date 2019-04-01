@@ -1,12 +1,5 @@
-# Decorouter
-WIP: Use decorator to make an express router
-Controllers are decoupled from express way to handle request and write response. This will be done by the decorator.
-
-## Create decorator
-A decorator will handle request call decorated function with data from request and then create response
-
-## Bind decorator to express app
-FIXME: this is made in a hacky way for now.
+# Deco-router
+Use decorator to make an express router.
 
 ## Use decorator
 Methods of controllers are decorated with route they respond to:
@@ -20,7 +13,36 @@ export class Room {
     }
 }
 ```
-There is no reference to express, or parsing request or whatever
+
+Express application ask decorators lib to bind function to express app:
+
+Application structure:
+```bash
+.
+├── app.ts
+├── controllers
+│   ├── index.ts
+│   └── Tester.ts
+└── server.ts
+```
+where controllers are exposed by `index.ts`, `app.ts` looks like:
+```javascript
+import express from 'express';
+import { Express } from 'express';
+import { bindApp } from 'deco-router';
+
+// requiring controllers loads decorators
+require('./controllers');
+
+const app: Express = express();
+
+// bind router to express application
+bindApp(app);
+
+export default app;
+```
+
+See test for a running example (`npm run serve`).
 
 ## Global handling
 Decorator could be used to handle globally:

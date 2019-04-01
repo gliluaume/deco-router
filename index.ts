@@ -42,7 +42,7 @@ export function decoratorFactory(method: httpMethod) {
                 target,
             });
         };
-    }
+    };
 }
 
 export const Get = decoratorFactory('get');
