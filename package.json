@@ -16,17 +16,17 @@
     "url": "https://github.com/gliluaume/deco-router"
   },
   "files": [
-    "index.ts"
+    "dist/index.*"
   ],
   "scripts": {
-    "build-ts": "tsc",
+    "build": "tsc --declaration",
     "serve": "nodemon dist/test-cases/test-app/server.js",
     "nopretest": "npm run build-ts",
     "test": "jest --detectOpenHandles --forceExit",
     "test:w": "jest --watch --detectOpenHandles --forceExit",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "lint:fix": "tslint -c tslint.json -p tsconfig.json --fix",
-    "watch-ts": "tsc -w"
+    "watch": "tsc -w"
   },
   "author": "gliluaume",
   "license": "ISC",
