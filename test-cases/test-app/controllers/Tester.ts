@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Get, middleware } from '../../..';
-import { track } from '../middleware';
+import { track, user, userOverride } from '../middlewares';
 
 export default class Tester {
     @Get('/test/stat')
@@ -14,6 +14,12 @@ export default class Tester {
     @middleware(track)
     @Get('/track')
     public blup(req: Request, res: Response, next: NextFunction) {
+        res.json({ nom: 'Roger' });
+    }
+    @middleware(user)
+    @middleware(userOverride)
+    @Get('/user-override')
+    public blop(req: Request, res: Response, next: NextFunction) {
         res.json({ nom: 'Roger' });
     }
 }

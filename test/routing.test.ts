@@ -52,8 +52,20 @@ describe('Decorators - Routing', () => {
                 .expect(200)
                 .then((res: any, ee: any) => {
                     expect(res.headers).toHaveProperty('x-track-id');
+                    expect(res.headers['x-track-id']).toEqual('5?GNKR');
                     expect(res.body).toBeInstanceOf(Object);
                     expect(res.body).toEqual({ nom: 'Roger' });
                 }));
+        it('apply middlewares in order', async () =>
+            await request(testApp)
+                .get('/user-override/')
+                .expect(200)
+                .then((res: any, ee: any) => {
+                    expect(res.locals).toHaveProperty('user');
+                    expect(res.headers.user).toEqual('user-new');
+                    expect(res.body).toBeInstanceOf(Object);
+                    expect(res.body).toEqual({ nom: 'Roger' });
+                }));
+
     });
 });
