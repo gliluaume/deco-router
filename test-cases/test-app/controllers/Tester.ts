@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Get, middleware } from '../../..';
+import { Track } from '../custom-decorator';
 import { track } from '../middleware';
 
 export default class Tester {
@@ -14,6 +15,11 @@ export default class Tester {
     @middleware(track)
     @Get('/track')
     public blup(req: Request, res: Response, next: NextFunction) {
+        res.json({ nom: 'Roger' });
+    }
+    @Track
+    @Get('/track-alias')
+    public blop(req: Request, res: Response, next: NextFunction) {
         res.json({ nom: 'Roger' });
     }
 }
