@@ -1,6 +1,6 @@
 {
   "name": "@gliluaume/deco-router",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "decorator for routing in an express context",
   "main": "dist/index.js",
   "keywords": [
