@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { Get } from '../../..';
+import { Get, middleware } from '../../..';
+import { track } from '../middleware';
 
 export default class Tester {
     @Get('/test/stat')
@@ -8,6 +9,11 @@ export default class Tester {
     }
     @Get('/test')
     public get(req: Request, res: Response, next: NextFunction) {
+        res.json({ nom: 'Roger' });
+    }
+    @middleware(track)
+    @Get('/track')
+    public blup(req: Request, res: Response, next: NextFunction) {
         res.json({ nom: 'Roger' });
     }
 }

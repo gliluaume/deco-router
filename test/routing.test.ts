@@ -46,5 +46,14 @@ describe('Decorators - Routing', () => {
                     expect(res.body).toBeInstanceOf(Object);
                     expect(res.body).toEqual({ nom: 'Roger' });
                 }));
+        it('set one middleware', async () =>
+            await request(testApp)
+                .get('/track/')
+                .expect(200)
+                .then((res: any, ee: any) => {
+                    expect(res.headers).toHaveProperty('x-track-id');
+                    expect(res.body).toBeInstanceOf(Object);
+                    expect(res.body).toEqual({ nom: 'Roger' });
+                }));
     });
 });

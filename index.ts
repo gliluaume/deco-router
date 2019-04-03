@@ -1,6 +1,5 @@
 import { Express, NextFunction, Request, Response } from 'express';
 import 'reflect-metadata';
-
 let debug = (...params: any[]) => {
     // tslint:disable-next-line
     console.log.apply(null, params);
@@ -26,6 +25,12 @@ interface IMethodDesc {
     method: httpMethod;
     path: string;
     target: any;
+}
+
+interface IMiddlewaresDesc {
+    descriptor: PropertyDescriptor;
+    target: any;
+    middleware: Middleware;
 }
 
 let app: Express;
@@ -57,13 +62,45 @@ export const Connect = decoratorFactory('connect');
 export const Trace = decoratorFactory('trace');
 export const Delete = decoratorFactory('delete');
 
+type Middleware = (a: Request, b: Response, c: NextFunction) => void;
+
+interface IMiddlewaresDesc {
+    descriptor: PropertyDescriptor;
+    middleware: Middleware;
+    target: any;
+}
+
+const middlewaresToBind: IMiddlewaresDesc[] = [];
+
+export function middleware(fn: Middleware) {
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+        middlewaresToBind.push({
+            descriptor,
+            middleware: fn,
+            target,
+        });
+    };
+}
+
 export function bindApp(expApp: Express) {
     app = expApp;
     while (routesToBind.length > 0) {
         const desc = routesToBind.pop();
+        const middlewares = [
+            ...getMiddleWares(desc),
+            desc.descriptor.value];
+
         app[desc.method](
             desc.path,
-            desc.descriptor.value);
+            ...middlewares);
         debug(`Registered: ${desc.method.toUpperCase()} ${desc.path}`);
     }
+}
+
+function getMiddleWares(methodDesc: IMethodDesc): Middleware[] {
+    return middlewaresToBind
+        .filter((middlewaresDesc: IMiddlewaresDesc) =>
+            middlewaresDesc.target === methodDesc.target
+            && middlewaresDesc.descriptor === methodDesc.descriptor)
+        .map((middlewaresDesc) => middlewaresDesc.middleware);
 }
